@@ -23,13 +23,26 @@ mood_df = st.session_state["mood_base"]
 if autenticado:
     st.title("Mood Tracker")
 
+    mood_list = mood_df.loc[mood_df["incomodo"].notnull(), "incomodo"].unique().tolist()
+
+    if "mood_options" not in st.session_state:
+        st.session_state.mood_options = mood_list
+
+    with st.popover("Adicionar Novo Mood"):
+        new_cat = st.text_input("Novo Incômodo")
+        if st.button("Add", use_container_width=True):
+            v = new_cat.strip()
+            if v and v not in st.session_state.mood_options:
+                st.session_state.mood_options.append(v)
+            st.rerun()
+    
     moods_ativos = pegar_moods_nao_resolvidos(mood_df)
 
     mood_editor = st.data_editor(
         moods_ativos,
         num_rows="fixed",
         column_config={
-            "incomodo": st.column_config.TextColumn("Incomodo"),
+            "incomodo": st.column_config.SelectboxColumn("Incomodo", options=st.session_state.mood_options),
             "observacao": st.column_config.TextColumn("Observação"),
             "intensidade": st.column_config.SelectboxColumn("Intensidade", options=[0,1,2,3,4,5],
                                                             format_func=lambda x: "😢" * int(x) if x > 0 else "👍(Problema Resolvido)",

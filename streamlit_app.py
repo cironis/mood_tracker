@@ -11,9 +11,9 @@ mood_page = st.Page(
 )
 
 new_mood_page = st.Page(
-    "views/novo_mood.py",
-    title="Novo Mood",
-    icon=":material/new_label:",
+    "views/analizar_mood.py",
+    title="Analisar Moods",
+    icon=":material/analytics:",
 )
 
 about_page = st.Page(
