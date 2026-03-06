@@ -10,7 +10,7 @@ mood_page = st.Page(
     default=True,
 )
 
-new_mood_page = st.Page(
+analysis_page = st.Page(
     "views/analizar_mood.py",
     title="Analisar Moods",
     icon=":material/analytics:",
@@ -28,7 +28,7 @@ about_page = st.Page(
 # --- NAVIGATION SETUP [WITH SECTIONS]---
 pg = st.navigation(
     {
-        "Controle de moods": [mood_page, new_mood_page,about_page],
+        "Controle de moods": [mood_page, analysis_page,about_page],
     }
 )
 
