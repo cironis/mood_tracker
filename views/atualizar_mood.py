@@ -40,7 +40,7 @@ if autenticado:
 
     mood_editor = st.data_editor(
         moods_ativos,
-        num_rows="fixed",
+        num_rows="dynamic",
         column_config={
             "incomodo": st.column_config.SelectboxColumn("Incomodo", options=st.session_state.mood_options),
             "observacao": st.column_config.TextColumn("Observação"),

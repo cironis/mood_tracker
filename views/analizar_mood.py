@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from auxiliar.google_sheets import get_sheet_data,append_sheet_data
+from auxiliar.google_sheets import get_sheet_data,set_sheet_data
 from auxiliar.athentication import caixa_de_autenticacao
 from auxiliar.tratar_bases import pegar_moods_nao_resolvidos
 
@@ -16,7 +16,9 @@ if password == password_parametro:
 autenticado = st.session_state["autenticado"]
 
 if "mood_base" not in st.session_state:
-    st.session_state["mood_base"] = get_sheet_data("mood_base")
+    base_limpa = get_sheet_data("mood_base")
+    base_limpa = base_limpa.drop_duplicates(keep="last").reset_index(drop=True)
+    st.session_state["mood_base"] = base_limpa
 
 mood_df = st.session_state["mood_base"]
 
