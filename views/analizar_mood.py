@@ -52,7 +52,7 @@ if autenticado:
 
         st.subheader("Observações:")
         st.dataframe(mood_data[["data","incomodo","observacao","intensidade"]]
-                     .sort_values(["data","incomodo"], ascending=[False,True]))
+                     .sort_values(["data","incomodo"], ascending=[True,True]))
 
         
 else:
