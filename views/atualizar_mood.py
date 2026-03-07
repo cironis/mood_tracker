@@ -54,7 +54,7 @@ if autenticado:
     salvar_botao = st.button("Salvar")
 
     if salvar_botao:
-        mood_editor["data"] = pd.to_datetime("today").strftime("%Y-%m-%d")
+        mood_editor["data"] = pd.Timestamp.now(tz="America/Sao_Paulo").strftime("%Y-%m-%d")
         mood_editor = mood_editor[["data","incomodo","observacao","intensidade"]]
         mood_lista = mood_editor.values.tolist()
         append_sheet_data("mood_base", mood_lista)
