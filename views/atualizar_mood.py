@@ -37,7 +37,9 @@ if autenticado:
             st.rerun()
     
     moods_ativos = pegar_moods_nao_resolvidos(mood_df)
-
+    
+    date_picker = st.date_input("Selecione a data para adicionar o mood:", value=pd.Timestamp.now(tz="America/Sao_Paulo").date())
+    
     mood_editor = st.data_editor(
         moods_ativos,
         num_rows="dynamic",
@@ -54,7 +56,8 @@ if autenticado:
     salvar_botao = st.button("Salvar")
 
     if salvar_botao:
-        mood_editor["data"] = pd.Timestamp.now(tz="America/Sao_Paulo").strftime("%Y-%m-%d")
+        data = date_picker.strftime("%Y-%m-%d")
+        mood_editor["data"] = data
         mood_editor = mood_editor[["data","incomodo","observacao","intensidade"]]
         mood_lista = mood_editor.values.tolist()
         append_sheet_data("mood_base", mood_lista)
